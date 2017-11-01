@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
  var app = express();
 //
 // // Specify the port.
-var port= normalizePort(process.env.PORT || '9000');
+var port= process.env.PORT || '9000';
 //
 // // Set Handlebars as the default templating engine.
  app.engine("handlebars", exphbs({ 
