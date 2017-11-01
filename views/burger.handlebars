@@ -25,11 +25,11 @@ h1,h2,h3,h4,p {
 	</div>
 	</div>
 	<div class="col-xs-4" id="center">
-		<form method="POST" role="form">
+		<form method="POST" role="form" action="/">
 			<label for="username">What is your name?</label>
-			<input type="text" id="username" default="Bob" class="form-control">
+			<input type="text" id="username" default="Bob" name="user_created" class="form-control">
 			<label for="add-burger">Add A Burger</label>
-			<input type="text" id="add-burger" class="form-control">
+			<input type="text" id="add-burger" name="burger_name" class="form-control">
 			<button class="btn btn-lg" id="add-burger-button" type="submit">Submit</button>
 		</form>
 	</div>
@@ -48,33 +48,37 @@ h1,h2,h3,h4,p {
 		</table>
 	</div>
 <script>
- $("#add-burger-button").on("click", function(event) {
-      event.preventDefault();
-	var timeStamp=moment().format();
-      var newBurger = {
-        burger_name: $("#add-burger").val().trim(),
-	user_created: $("#username").val().trim(),
-	date_created: timeStamp
-      };
+$(document).ready(function(){
 
-      $.post("/", newBurger)
-      .done(function(data) {
-        console.log(data);
-        alert("Adding Burger...");
-      });
-    });	
+// $("#add-burger-button").on("click", function(event) {
+  //    event.preventDefault();
+//	var timeStamp=moment().format();
+  //    var newBurger = {
+    //    burger_name: $("#add-burger").val().trim(),
+//	user_created: $("#username").val().trim(),
+//	date_created: timeStamp
+  //    };
+//
+  //    $.post("/", newBurger)
+    //  .done(function(data) {
+      //  console.log(data);
+//        alert("Adding Burger...");
+  //    });
+ //   });	
 $(".eatIt").on("click",function(event) {
 	event.preventDefault();
 	var eatTheBurgerID = $(this).data('value');
 	console.log(eatTheBurgerID);
 	if (eatTheBurgerID) {
-	var path='/eatburger/' + eatTheBurgerID;
-	$.get(path).done((data) => {
-	console.log(data);
+ 	var path='/eatburger/' + eatTheBurgerID;
+//	$.post(path).done((data) => {
+ 	
+	$.post(path).done((data) => {
 	alert("Ate that burger!");
-	
+	$(document).html(data);
 	});
 }
+});
 });
 </script>
 </div>
